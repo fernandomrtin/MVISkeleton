@@ -1,16 +1,14 @@
 package training.model.menu
 
-import androidx.annotation.StringRes
-
 
 data class MenuData(
-    @StringRes val header: Int?,
+    val header: Int?,
     val itemList: List<MenuElement>
 )
 
 data class MenuElement(
     val id: MenuOption,
-    @StringRes val titleRes: Int,
+    val titleRes: Int,
     val type: MenuType,
 )
 

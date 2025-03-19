@@ -10,7 +10,7 @@ import training.model.menu.MenuElement
 fun NavigationDrawer(
     drawerState: DrawerState,
     menuData: MenuData = MenuData(header = null, itemList = emptyList()),
-    onMenuItemCLick: (MenuElement) -> Unit = {},
+    onMenuElementClick: (MenuElement) -> Unit = {},
     onBackMenuItemClick: () -> Unit = {},
     onCloseDrawerClick: () -> Unit = {},
     content: @Composable () -> Unit
@@ -22,7 +22,7 @@ fun NavigationDrawer(
             DrawerContent(
                 drawerState = drawerState,
                 menuData = menuData,
-                onMenuItemClick = onMenuItemCLick,
+                onMenuItemClick = onMenuElementClick,
                 onBackMenuItemClick = onBackMenuItemClick,
                 onCloseDrawerClick = onCloseDrawerClick
             )
