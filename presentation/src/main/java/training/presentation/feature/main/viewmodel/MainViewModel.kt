@@ -27,14 +27,13 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-//            mainBridge.getUserData().fold(
-//                ifLeft = {},
-//                ifRight = { userType ->
-//                    _mainState.update { mainState ->
-//                        mainState.copy(userType = userType)
-//                    }
-//                }
-//            )
+            mainBridge.getMonstersList().fold({
+
+            },{ monsters ->
+                monsters.map { monster ->
+                    println("FERNANDO " + monster.name)
+                }
+            })
         }
     }
 
