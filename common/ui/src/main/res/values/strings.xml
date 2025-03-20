@@ -1,4 +1,26 @@
 <resources>
     <string name="app_name">MVISkeleton</string>
     <string name="test">MVISkeleton</string>
+    <!-- Menu items -->
+    <string name="home">Home</string>
+    <string name="calendar">Calendario</string>
+    <string name="tickets">Entradas</string>
+    <string name="hospitality">Hospitalidad</string>
+    <string name="team">Equipo</string>
+    <string name="store">Tienda</string>
+    <string name="club">Club</string>
+    <string name="subscriber_area">Área abonados</string>
+    <string name="configuration">Configuración</string>
+    <string name="history">Historia</string>
+    <string name="stadium">Estadi Son Moix</string>
+    <string name="sport_city">Ciudad deportiva</string>
+    <string name="foundation">Fundació Reial Mallorca</string>
+    <string name="groups">Peñas</string>
+    <string name="fans">L\'infern1916</string>
+    <string name="contact">Contacto</string>
+    <string name="language">Idioma</string>
+    <string name="notifications">Notifications</string>
+    <string name="share_app">Compartir la app</string>
+    <string name="rating_app">Valora la app</string>
+    <string name="terms_and_conditions">Términos y condiciones</string>
 </resources>

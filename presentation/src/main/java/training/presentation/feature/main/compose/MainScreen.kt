@@ -9,6 +9,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import training.presentation.feature.main.navigation.AppNavHost
 import training.presentation.feature.main.navigation.NavRoutes
+import training.presentation.feature.main.viewmodel.MainIntent
 import training.presentation.feature.main.viewmodel.MainViewModel
 import training.ui.NavigationDrawer
 import training.ui.Toolbar
@@ -24,7 +25,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
     LaunchedEffect(navController) {
         navController.currentBackStackEntryFlow.collect { backStackEntry ->
             val isHome = backStackEntry.destination.route == NavRoutes.Home.route
-            viewModel.onChangeDrawerVisibility(isHome)
+            viewModel.onIntent(MainIntent.ToggleDrawerVisibility(isHome))
         }
     }
 
@@ -33,18 +34,18 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
     }
 
     CompositionLocalProvider(LocalColors provides getLocalColorsByUserType()) {
-        if (mainState.enableDrawer) {
+        if (mainState.isDrawerEnabled) {
             NavigationDrawer(
                 drawerState = drawerState,
                 menuData = mainState.menuData,
-                onMenuItemCLick = { item ->
-                    viewModel.onMenuItemClick(item)
+                onMenuElementClick = { item ->
+                    viewModel.onIntent(MainIntent.SelectMenuElement(item))
                 },
                 onBackMenuItemClick = {
-                    viewModel.onBackSubMenuClick()
+                    viewModel.onIntent(MainIntent.NavigateBackSubMenu)
                 },
                 onCloseDrawerClick = {
-                    viewModel.onCloseDrawerClick()
+                    viewModel.onIntent(MainIntent.CloseDrawer)
                 }
             ) {
                 Scaffold(
@@ -52,7 +53,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
                         Toolbar(
                             navIcon = training.ui.R.drawable.ic_menu,
                             onIconClick = {
-                                viewModel.onNavigationItemClick()
+                                viewModel.onIntent(MainIntent.NavigationItemClick)
                             })
                     },
                     containerColor = Color.Black

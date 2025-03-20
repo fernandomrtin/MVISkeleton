@@ -11,6 +11,8 @@ import kotlinx.coroutines.launch
 import training.domain.bridge.MainBridge
 import training.model.menu.MenuData
 import training.model.menu.MenuElement
+import training.model.menu.MenuType
+import training.presentation.feature.main.toMenuElementList
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,65 +36,89 @@ class MainViewModel @Inject constructor(
 //                }
 //            )
         }
-
-    }
-
-    fun onNavigationItemClick() {
-        getMenuOptionList()
     }
 
     private fun getMenuOptionList(menuElement: MenuElement? = null) {
         viewModelScope.launch {
-//            mainBridge.getMenuListByOption(menuElement?.id).fold(
-//                ifLeft = {},
-//                ifRight = { menuOptionList ->
-//                    _mainState.update { mainState ->
-//                        mainState.copy(
-//                            isDrawerOpen = true,
-//                            menuData = MenuData(
-//                                header = menuItem?.titleRes,
-//                                itemList = menuOptionList.toMenuItemList(),
-//                                sawBackground = menuItem == null
-//                            )
-//                        )
-//                    }
-//                }
-//            )
+            mainBridge.getMenuListByOption(menuElement?.id).fold(
+                ifLeft = {},
+                ifRight = { menuOptionList ->
+                    _mainState.update { mainState ->
+                        mainState.copy(
+                            isDrawerOpen = true,
+                            menuData = MenuData(
+                                header = menuElement?.titleRes,
+                                itemList = menuOptionList.toMenuElementList()
+                            )
+                        )
+                    }
+                }
+            )
         }
     }
 
-    fun onMenuItemClick(menuElement: MenuElement) {
-//        when (menuItem.type) {
-//            is MenuType.Section -> closeDrawer()
-//            is MenuType.SubMenu -> {
-//                stackMenuList.add(mainState.value.menuData)
-//                getMenuOptionList(menuItem)
-//            }
-//
-//            else -> closeDrawer()
-//        }
+    fun onIntent(intent: MainIntent) {
+        when (intent) {
+            is MainIntent.ToggleDrawerVisibility -> {
+                changeDrawerStatus(isEnabled = intent.isVisible)
+            }
+
+            MainIntent.OpenDrawer -> {
+                openDrawer()
+            }
+
+            MainIntent.CloseDrawer -> {
+                closeDrawer()
+            }
+
+            is MainIntent.SelectMenuElement -> {
+                menuElementClick(intent.element)
+            }
+
+            MainIntent.NavigateBackSubMenu -> {
+                backSubMenuClick()
+            }
+
+            MainIntent.NavigationItemClick -> {
+                getMenuOptionList()
+            }
+        }
     }
 
-    fun onCloseDrawerClick() {
-        closeDrawer()
-    }
-
-    fun onChangeDrawerVisibility(visibility: Boolean) {
+    private fun changeDrawerStatus(isEnabled: Boolean) {
         _mainState.update { mainState ->
-            mainState.copy(enableDrawer = visibility)
+            mainState.copy(isDrawerEnabled = isEnabled)
         }
     }
 
-    fun onBackSubMenuClick() {
+    private fun openDrawer() {
         _mainState.update { mainState ->
-            mainState.copy(menuData = stackMenuList.last())
+            mainState.copy(isDrawerOpen = true)
         }
-        stackMenuList.removeAt(stackMenuList.size - 1)
     }
 
     private fun closeDrawer() {
         _mainState.update { mainState ->
             mainState.copy(isDrawerOpen = false)
         }
+    }
+
+    private fun menuElementClick(menuElement: MenuElement) {
+        when (menuElement.type) {
+            is MenuType.Section -> closeDrawer()
+            is MenuType.SubMenu -> {
+                stackMenuList.add(mainState.value.menuData)
+                getMenuOptionList(menuElement)
+            }
+
+            else -> closeDrawer()
+        }
+    }
+
+    private fun backSubMenuClick() {
+        _mainState.update { mainState ->
+            mainState.copy(menuData = stackMenuList.last())
+        }
+        stackMenuList.removeAt(stackMenuList.size - 1)
     }
 }
