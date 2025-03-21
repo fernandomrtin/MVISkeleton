@@ -2,7 +2,7 @@ package training.domain.contract
 
 import arrow.core.Either
 import training.model.failure.Failure
-import training.model.menu.MenuOption
+import training.domain.model.MenuOption
 
 interface MenuRepository {
     fun getMainMenuOptionList(): Either<Failure, List<MenuOption>>

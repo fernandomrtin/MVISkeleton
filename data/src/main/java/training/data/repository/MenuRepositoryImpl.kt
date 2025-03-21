@@ -1,17 +1,17 @@
 package training.data.repository
 
-import training.data.datasource.MenuDatasource
+import training.data.datasource.local.MenuLocalDatasource
 import training.domain.contract.MenuRepository
-import training.model.menu.MenuOption
+import training.domain.model.MenuOption
 import javax.inject.Inject
 
 class MenuRepositoryImpl @Inject constructor(
-    private val menuDatasource: MenuDatasource
+    private val menuLocalDatasource: MenuLocalDatasource
 ): MenuRepository {
 
     override fun getMainMenuOptionList() =
-        menuDatasource.getMainMenuOptionList()
+        menuLocalDatasource.getMainMenuOptionList()
 
     override fun getSubMenuByOption(menuOption: MenuOption) =
-        menuDatasource.getSubMenuByOption(menuOption)
+        menuLocalDatasource.getSubMenuByOption(menuOption)
 }

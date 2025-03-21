@@ -1,15 +1,24 @@
 package training.data.repository
 
-import training.data.datasource.MonstersDatasource
+import arrow.core.Either
+import training.data.datasource.local.MonstersLocalDatasource
+import training.data.datasource.remote.MonstersRemoteDatasource
+import training.data.model.entity.toDomainModel
+import training.data.model.mapper.toDomainModel
 import training.domain.contract.MonstersRepository
-import training.model.monster.domain.toMonster
+import training.model.failure.Failure
+import training.domain.model.Monster
 import javax.inject.Inject
 
 class MonstersRepositoryImpl @Inject constructor(
-    private val monstersDatasource: MonstersDatasource
+    private val monstersRemoteDatasource: MonstersRemoteDatasource,
+    private val monstersLocalDatasource: MonstersLocalDatasource
 ): MonstersRepository {
 
-    override suspend fun getMonsterData(id: Int) =
-        monstersDatasource.getMonsterData(id).map { it.toMonster() }
+    override suspend fun fetchMonsterData(id: Int) =
+        monstersRemoteDatasource.getMonsterData(id).map { it.toDomainModel() }
+
+    override suspend fun getMonsterFromLocal(id: Int): Either<Failure, Monster> =
+        monstersLocalDatasource.getMonsterData(id).map { it.toDomainModel() }
 
 }

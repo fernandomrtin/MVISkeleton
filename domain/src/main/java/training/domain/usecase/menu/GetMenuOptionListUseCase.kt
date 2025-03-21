@@ -3,7 +3,7 @@ package training.domain.usecase.menu
 import arrow.core.Either
 import training.domain.contract.MenuRepository
 import training.model.failure.Failure
-import training.model.menu.MenuOption
+import training.domain.model.MenuOption
 import javax.inject.Inject
 
 class GetMenuOptionListUseCase @Inject constructor(

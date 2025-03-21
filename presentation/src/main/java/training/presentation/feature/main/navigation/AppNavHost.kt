@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import training.presentation.feature.details.DetailsScreen
-import training.presentation.feature.home.HomeScreen
+import training.presentation.feature.home.compose.HomeScreen
 
 @Composable
 fun AppNavHost(navController: NavHostController, modifier: Modifier = Modifier, onBackPressed: () -> Unit = {}) {
@@ -17,15 +17,15 @@ fun AppNavHost(navController: NavHostController, modifier: Modifier = Modifier, 
     ) {
         composable(NavRoutes.Home.route) {
             HomeScreen(
-                onNavigateToDetails = { userId ->
-                    navController.navigate(NavRoutes.Details.createRoute(userId))
+                onNavigateToDetails = { monsterId ->
+                    navController.navigate(NavRoutes.Details.createRoute(monsterId))
                 }
             )
         }
 
         composable(NavRoutes.Details.route) { backStackEntry ->
-            val userId = backStackEntry.arguments?.getString("userId")?.toIntOrNull()
-            DetailsScreen(userId = userId, onBackPressed = onBackPressed)
+            val monsterId = backStackEntry.arguments?.getString("monsterId")?.toIntOrNull()
+            DetailsScreen(monsterId = monsterId, onBackPressed = onBackPressed)
         }
     }
 }

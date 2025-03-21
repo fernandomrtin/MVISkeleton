@@ -2,8 +2,9 @@ package training.domain.contract
 
 import arrow.core.Either
 import training.model.failure.Failure
-import training.model.monster.domain.Monster
+import training.domain.model.Monster
 
 interface MonstersRepository {
-    suspend fun getMonsterData(id: Int): Either<Failure, Monster>
+    suspend fun fetchMonsterData(id: Int): Either<Failure, Monster>
+    suspend fun getMonsterFromLocal(id: Int): Either<Failure, Monster>
 }
