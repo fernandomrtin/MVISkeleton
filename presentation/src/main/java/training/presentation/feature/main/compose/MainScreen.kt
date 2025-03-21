@@ -56,7 +56,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
                                 viewModel.onIntent(MainIntent.NavigationItemClick)
                             })
                     },
-                    containerColor = Color.Black
+                    containerColor = Color.White
                 ) { paddingValues ->
                     AppNavHost(
                         navController = navController,

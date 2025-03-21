@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import training.presentation.feature.details.DetailsScreen
-import training.presentation.feature.home.HomeScreen
+import training.presentation.feature.home.compose.HomeScreen
 
 @Composable
 fun AppNavHost(navController: NavHostController, modifier: Modifier = Modifier, onBackPressed: () -> Unit = {}) {

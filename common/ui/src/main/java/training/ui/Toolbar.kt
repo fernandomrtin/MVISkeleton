@@ -29,7 +29,7 @@ fun Toolbar(
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color.Transparent,
             titleContentColor = Color.Transparent,
-            navigationIconContentColor = Color.White
+            navigationIconContentColor = Color.Black
         ),
         title = {
             image?.let {

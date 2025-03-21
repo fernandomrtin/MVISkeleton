@@ -25,18 +25,6 @@ class MainViewModel @Inject constructor(
 
     private val stackMenuList: MutableList<MenuData> = mutableListOf()
 
-    init {
-        viewModelScope.launch {
-            mainBridge.getMonstersList().fold({
-
-            },{ monsters ->
-                monsters.map { monster ->
-                    println("FERNANDO " + monster.name)
-                }
-            })
-        }
-    }
-
     private fun getMenuOptionList(menuElement: MenuElement? = null) {
         viewModelScope.launch {
             mainBridge.getMenuListByOption(menuElement?.id).fold(

@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import training.domain.bridge.HomeBridge
+import training.domain.bridge.HomeBridgeImpl
 import training.domain.bridge.MainBridge
 import training.domain.bridge.MainBridgeImpl
 import training.domain.contract.MenuRepository
@@ -17,11 +19,18 @@ class DomainModule {
 
     @Provides
     fun provideMainBridge(
-        getMenuOptionListUseCase: GetMenuOptionListUseCase,
-        getMonstersListUseCase: GetMonstersListUseCase
+        getMenuOptionListUseCase: GetMenuOptionListUseCase
     ): MainBridge {
         return MainBridgeImpl(
-            getMenuOptionListUseCase,
+            getMenuOptionListUseCase
+        )
+    }
+
+    @Provides
+    fun provideHomeBridge(
+        getMonstersListUseCase: GetMonstersListUseCase
+    ): HomeBridge {
+        return HomeBridgeImpl(
             getMonstersListUseCase
         )
     }
