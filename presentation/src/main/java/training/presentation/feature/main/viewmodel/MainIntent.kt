@@ -1,6 +1,6 @@
 package training.presentation.feature.main.viewmodel
 
-import training.model.menu.MenuElement
+import training.domain.model.MenuElement
 
 sealed class MainIntent {
     data class ToggleDrawerVisibility(val isVisible: Boolean) : MainIntent()

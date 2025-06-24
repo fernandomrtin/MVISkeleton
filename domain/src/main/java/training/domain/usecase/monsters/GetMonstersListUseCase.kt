@@ -6,7 +6,7 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import training.domain.contract.MonstersRepository
 import training.model.failure.Failure
-import training.model.monster.domain.Monster
+import training.domain.model.Monster
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -15,10 +15,10 @@ class GetMonstersListUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(): Either<Failure, List<Monster>> = coroutineScope {
-        val randomNumbers = List(5) { Random.nextInt(1, 351) }
+        val randomNumbers = List(10) { Random.nextInt(1, 351) }
         val results = randomNumbers.map { monsterNumber ->
             async {
-                monstersRepository.getMonsterData(monsterNumber)
+                monstersRepository.fetchMonsterData(monsterNumber)
             }
         }.awaitAll()
         val failures = results.filterIsInstance<Either.Left<Failure>>()

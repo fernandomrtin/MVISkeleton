@@ -1,12 +1,16 @@
 package training.data.di
 
+import android.content.Context
+import androidx.room.Room
 import training.network.di.TokenProvider
 import training.data.TokenManager
-import training.data.datasource.MenuDatasource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import training.data.datasource.local.database.MonsterDao
+import training.data.datasource.local.database.MonsterDatabase
 import javax.inject.Singleton
 
 @Module
@@ -15,13 +19,22 @@ object DataSourceModule {
 
     @Provides
     @Singleton
-    fun provideTokenProvider(tokenManager: TokenManager): TokenProvider {
-        return tokenManager
+    fun provideDatabase(@ApplicationContext context: Context): MonsterDatabase {
+        return Room.databaseBuilder(
+            context,
+            MonsterDatabase::class.java,
+            "monsters_db"
+        ).build()
+    }
+
+    @Provides
+    fun provideMonsterDao(db: MonsterDatabase): MonsterDao {
+        return db.monsterDao()
     }
 
     @Provides
     @Singleton
-    fun provideMenuDataSource(): MenuDatasource {
-        return MenuDatasource()
+    fun provideTokenProvider(tokenManager: TokenManager): TokenProvider {
+        return tokenManager
     }
 }

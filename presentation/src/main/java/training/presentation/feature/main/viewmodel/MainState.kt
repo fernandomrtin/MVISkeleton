@@ -1,6 +1,6 @@
 package training.presentation.feature.main.viewmodel
 
-import training.model.menu.MenuData
+import training.domain.model.MenuData
 
 data class MainState(
     val isDrawerEnabled: Boolean = true,

@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import training.ui.Toolbar
 
 @Composable
-fun DetailsScreen(userId: Int?, onBackPressed: () -> Unit) {
+fun DetailsScreen(monsterId: Int?, onBackPressed: () -> Unit) {
     Scaffold(
         topBar = {
             Toolbar(
@@ -27,7 +27,7 @@ fun DetailsScreen(userId: Int?, onBackPressed: () -> Unit) {
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            Text(text = "Detalles del Usuario ID: ${userId ?: "Desconocido"}",
+            Text(text = "Detalle del monstruo ID: ${monsterId ?: "Desconocido"}",
                 color = Color.White)
         }
     }

@@ -3,13 +3,16 @@ package training.ui
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.runtime.Composable
-import training.model.menu.MenuData
-import training.model.menu.MenuElement
+import training.domain.model.MenuData
+import training.domain.model.MenuElement
 
 @Composable
 fun NavigationDrawer(
     drawerState: DrawerState,
-    menuData: MenuData = MenuData(header = null, itemList = emptyList()),
+    menuData: MenuData = MenuData(
+        header = null,
+        itemList = emptyList()
+    ),
     onMenuElementClick: (MenuElement) -> Unit = {},
     onBackMenuItemClick: () -> Unit = {},
     onCloseDrawerClick: () -> Unit = {},

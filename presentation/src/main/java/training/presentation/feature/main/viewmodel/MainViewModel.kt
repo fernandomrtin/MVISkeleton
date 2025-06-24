@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import training.domain.bridge.MainBridge
-import training.model.menu.MenuData
-import training.model.menu.MenuElement
-import training.model.menu.MenuType
+import training.domain.model.MenuData
+import training.domain.model.MenuElement
+import training.domain.model.MenuType
 import training.presentation.feature.main.toMenuElementList
 import javax.inject.Inject
 
@@ -24,18 +24,6 @@ class MainViewModel @Inject constructor(
     val mainState: StateFlow<MainState> = _mainState.asStateFlow()
 
     private val stackMenuList: MutableList<MenuData> = mutableListOf()
-
-    init {
-        viewModelScope.launch {
-            mainBridge.getMonstersList().fold({
-
-            },{ monsters ->
-                monsters.map { monster ->
-                    println("FERNANDO " + monster.name)
-                }
-            })
-        }
-    }
 
     private fun getMenuOptionList(menuElement: MenuElement? = null) {
         viewModelScope.launch {

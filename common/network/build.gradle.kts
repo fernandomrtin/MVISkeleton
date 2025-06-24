@@ -41,8 +41,8 @@ dependencies {
     implementation(libs.material)
 
     implementation(libs.retrofit)
-    implementation(libs.retrofit.gson)
-    implementation(libs.gson)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
     implementation(libs.hilt.android)

@@ -11,10 +11,10 @@ import androidx.compose.ui.unit.dp
 import training.ui.row.HeaderMenuRow
 import training.ui.row.MenuRow
 import kotlinx.coroutines.launch
-import training.model.menu.MenuData
-import training.model.menu.MenuElement
-import training.model.menu.MenuOption
-import training.model.menu.MenuType
+import training.domain.model.MenuData
+import training.domain.model.MenuElement
+import training.domain.model.MenuOption
+import training.domain.model.MenuType
 import training.ui.theme.LocalColors
 
 @Composable
@@ -89,8 +89,11 @@ fun DrawerPreview() {
         drawerState = rememberDrawerState(DrawerValue.Open),
         menuData = MenuData(
             header = null, itemList = listOf(
-                MenuElement(id = MenuOption.HOME, R.string.test, MenuType.SubMenu),
-                MenuElement(id = MenuOption.STORE, R.string.test, MenuType.SubMenu),
+                MenuElement(
+                    id = MenuOption.HOME,
+                    R.string.test,
+                    MenuType.SubMenu
+                )
             )
         )
     )
