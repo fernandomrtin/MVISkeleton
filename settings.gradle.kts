@@ -21,3 +21,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "MVISkeleton"
 include(":app")
+include(":presentation")
+include(":common:ui")
+include(":common:network")
+include(":common:model")
+include(":data")
+include(":domain")
